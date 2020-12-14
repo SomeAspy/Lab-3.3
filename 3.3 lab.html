@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+By Aiden Baker. 
+Licensed to Aiden Baker using GNU GPLv3
+https://choosealicense.com/licenses/gpl-3.0/
+</head>
+<script>
+    function MonthName(MonthNum) {
+        //above we made a "custom block" named MonthName with Inputs MonthNum
+        switch(MonthNum) {
+            case 1: return "January";
+            case 2: return "February";
+            case 3: return "March";
+            case 4: return "April";
+            case 5: return "May";
+            case 6: return "June";
+            case 7: return "July";
+            case 8: return "August";
+            case 9: return "September";
+            case 10: return "October";
+            case 11: return "November";
+            case 12: return "December";
+            default: return "That doesn't seem quite right..."; //might replace default with an error or something.
+        };
+    };
+    function DayName(DayNum) { //this creates a function named dayname with inputs daynum
+        switch(DayNum) { //case and switch is more efficient than if elseif, as it halts the checks, saving CPU cycles. if you want to see what happens when you user if else
+                        //over and over again, check out this video https://www.youtube.com/watch?v=r97nq2h8k9M
+            case 1: return "Sunday";
+            case 2: return "Monday";
+            case 3: return "Tuesday";
+            case 4: return "Wednesday";
+            case 5: return "Thursday";
+            case 6: return "Friday";
+            case 7: return "Saturday";
+            default: return NaN; //default is applied if there is no match. in this case it is NaN
+        };
+    };
+    function DaysIn(MonthNum) {
+        switch(MonthNum) { //cases can be stacked if you dont use return or break.
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12: return 31; //months with 31 days
+            case 2: return 28; //months with 28 days
+            case 4: case 6: case 9: case 11: return 30; //months with 30 days
+        };
+    };
+    function IsLeapYear(Year) {
+        return Year%400==0 || Year%4==0 && Year%100!=0;
+    };
+    function IsValidDate(MonthNum, DayNum) {
+        return DaysIn(MonthNum)>=DayNum
+    };
+    function MonthGivenDay(Year, DayNum) {
+        if(!IsLeapYear(Year) && DayNum==366) { //I don't think you can use ternary operators on just IF statements without an else
+            return "Only leap years have 366 days!";
+        };
+        let LeapDay = IsLeapYear ? 1 : 0; //let is the new way of making vars
+        switch(DayNum) {
+            case DayNum<=31: return 1;
+            case DayNum<=59+LeapDay: return 2;
+            case DayNum<=90+LeapDay: return 3;
+            case DayNum<=120+LeapDay: return 4;
+            case DayNum<=151+LeapDay: return 5;
+            case DayNum<=181+LeapDay: return 6;
+            case DayNum<=212+LeapDay: return 7;
+            case DayNum<=243+LeapDay: return 8;
+            case DayNum<=273+LeapDay: return 9;
+            case DayNum<=304+LeapDay: return 10;
+            case DayNum<=334+LeapDay: return 11;
+            case DayNum<=365+LeapDay: return 12;
+            default: "Seems to be an invalid day!";
+        };
+    };
+    function DayOfMonth(Year, DayNum) {
+        if(!IsLeapYear(Year) && DayNum==366) {
+            return "Only leap years have 366 days!";
+        };
+        let LeapDay = IsLeapYear ? 1 : 0;
+        switch(DayNum) {
+            case DayNum<=31: return DayNum;
+            case DayNum<=59+LeapDay: return DayNum-31;
+            case DayNum<=90+LeapDay: return DayNum-LeapDay-59;
+            case DayNum<=120+LeapDay: return DayNum-LeapDay-90;
+            case DayNum<=151+LeapDay: return DayNum-LeapDay-120;
+            case DayNum<=181+LeapDay: return DayNum-LeapDay-151;
+            case DayNum<=212+LeapDay: return DayNum-LeapDay-181;
+            case DayNum<=243+LeapDay: return DayNum-LeapDay-212;
+            case DayNum<=273+LeapDay: return DayNum-LeapDay-243;
+            case DayNum<=304+LeapDay: return DayNum-LeapDay-273;
+            case DayNum<=334+LeapDay: return DayNum-LeapDay-304;
+            case DayNum<=365+LeapDay: return DayNum-LeapDay-334;
+            default: "Seems to be an invalid day!";
+        };
+    };
+    let YearInput = prompt("Enter a year");
+    let MonthInput = prompt("Enter month (number)");
+    let DayInput = prompt("Enter a day (0-366)");
+    if(IsValidDate(MonthInput, DaysIn(MonthInput))) {
+        alert("leapyear?: " + IsLeapYear(YearInput) + " Month: " + MonthName(MonthGivenDay(YearInput, DayInput)) + " Day of Month: " + DayOfMonth(YearInput, DayInput) + " This month has " + DaysIn(MonthInput));
+    } else {
+        alert("this isn't a valid date!");
+    };
+</script>
+</html>
