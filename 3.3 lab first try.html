@@ -102,7 +102,7 @@ https://choosealicense.com/licenses/gpl-3.0/
     let YearInput = Number(prompt("Enter a year"));
     let MonthInput = Number(prompt("Enter month (number)"));
     let DayInput = Number(prompt("Enter a day (0-366)"));
-    if(IsValidDate(MonthInput, DaysInput)) {
+    if(IsValidDate(MonthInput, DayInput)) {
         alert("leapyear?: " + IsLeapYear(YearInput) + " Month: " + MonthName(MonthGivenDay(YearInput, DayInput)) + " Day of Month: " + DayOfMonth(YearInput, DayInput) + " This month has " + DaysIn(MonthInput));
     } else {
         alert("this isn't a valid date!");
